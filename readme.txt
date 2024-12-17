@@ -7,7 +7,9 @@ An artificial dataset is then created to mimic blunt tips. The blunt tip image i
 whose center and standard deviation are parameters chosen by the user. In our case, we randomly select these parameters from a uniform
 distribution between [0.2,0.8) for the standard deviation (the tip radius), and the x and y offset of the gaussian center (with [0.2,0.8) 
 being in units of pixels). We did not have time to try and do the double tip too. We realise that using a single AFM image will cause major overfitting
-but training a more robust model we could apply to more data that still showed good results wasn't realistic within this timeframe. 
+but training a more robust model we could apply to more data that still showed good results wasn't realistic within this timeframe. We realise that this
+will have likely caused major overfitting of our models. Any test statistics given should also be taken with a grain of salt, given our "test" set is
+sampled from the same distribution as the training and validation sets and the output should be of the same uncorrupted image.
 
 Solution: Our main focus were autoencoders. We tried a variety of different sizes and depths, mainly basing it off this paper (ref). We 
 also tried some different loss functions, most notably a combination of MAE loss and SSIM loss, equally weighted. We compare the results of a few of the different
