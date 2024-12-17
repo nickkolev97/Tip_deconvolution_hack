@@ -1,18 +1,7 @@
 Hackathon submission (17/12/2024) for tip deconvolution.
 
-Aim: To fix tip artefacts in AFM images such as blunt tip and double tip.
+In this hackathon submission, we focus on mitigating tip-induced artifacts in AFM images, particularly those arising from blunt or imperfectly shaped tips. The dataset consists of a single AFM scan of unspecified lateral dimensions, from which we generate synthetic training examples by convolving the original image with a Gaussian kernel. The Gaussian’s standard deviation (tip radius) and center coordinates are randomly sampled from a uniform distribution in [0.2, 0.8), enabling controlled generation of blunt tip artifacts. Although we intended to model double-tip artifacts as well, time constraints precluded this addition.
 
-Dataset: We are using the same dataset as in the "afm_imperfect_probe.ipynb" notebook. This is a single AFM scan of size ___nm and 256 by 256 pixels.
-An artificial dataset is then created to mimic blunt tips. The blunt tip image is made by convolving the original image with a gaussian
-whose center and standard deviation are parameters chosen by the user. In our case, we randomly select these parameters from a uniform
-distribution between [0.2,0.8) for the standard deviation (the tip radius), and the x and y offset of the gaussian center a.k.a the tip center (with [0.2,0.8) 
-being in units of pixels). We did not have time to try and do the double tip too. We realise that using a single AFM image will cause major overfitting
-but training a more robust model we could apply to more data that still showed good results wasn't realistic within this timeframe. We realise that this
-will have likely caused major overfitting of our models. Any test statistics given should also be taken with a grain of salt, given our "test" set is
-sampled from the same distribution as the training and validation sets and the output should be of the same uncorrupted image.
+We acknowledge that using a single image for training may lead to substantial overfitting, and thus any derived metrics should be interpreted with caution. Nonetheless, our primary objective was to explore the feasibility of autoencoder-based solutions. Drawing on established literature, we tested various architectures and loss functions, notably combining MAE and SSIM metrics. As a comparative baseline, we employed Gwyddion’s tip estimation and surface reconstruction methods on select images and contrasted these with our trained models’ outputs.
 
-Solution: Our main focus were autoencoders. We tried a variety of different sizes and depths, mainly basing it off this paper (ref). We 
-also tried some different loss functions, most notably a combination of MAE loss and SSIM loss, equally weighted. We compare the results of a few of the different
-models by using their SSIM score compared to the original, uncorrupted image. In addition, we also used gwyddion's tip estimation and surface reconstruction function
-on two images and we compare these to the autoencoders too.
-
+Additionally, we extended the same methodology to an experimental STM dataset, artificially introducing blunt tip defects as a preliminary proof of concept for transferability to other scanning probe or electron microscopy techniques. While initial STM results appear promising, further research is necessary to address specific artifacts associated with STM tip geometries and to rigorously evaluate the approach’s generalizability.
