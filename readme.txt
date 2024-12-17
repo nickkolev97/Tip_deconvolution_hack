@@ -2,10 +2,10 @@ Hackathon submission (17/12/2024) for tip deconvolution.
 
 Aim: To fix tip artefacts in AFM images such as blunt tip and double tip.
 
-Dataset: We are using the same dataset as in the "afm_imperfect_probe.ipynb" notebook. This is a single AFM scan of size ___nm?
+Dataset: We are using the same dataset as in the "afm_imperfect_probe.ipynb" notebook. This is a single AFM scan of size ___nm and 256 by 256 pixels.
 An artificial dataset is then created to mimic blunt tips. The blunt tip image is made by convolving the original image with a gaussian
 whose center and standard deviation are parameters chosen by the user. In our case, we randomly select these parameters from a uniform
-distribution between [0.2,0.8) for the standard deviation (the tip radius), and the x and y offset of the gaussian center (with [0.2,0.8) 
+distribution between [0.2,0.8) for the standard deviation (the tip radius), and the x and y offset of the gaussian center a.k.a the tip center (with [0.2,0.8) 
 being in units of pixels). We did not have time to try and do the double tip too. We realise that using a single AFM image will cause major overfitting
 but training a more robust model we could apply to more data that still showed good results wasn't realistic within this timeframe. We realise that this
 will have likely caused major overfitting of our models. Any test statistics given should also be taken with a grain of salt, given our "test" set is
